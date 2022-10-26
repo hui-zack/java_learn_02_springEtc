@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>_3_Maven_pomVariable_main</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+
+    <parent>
+        <groupId>com.hui</groupId>
+        <artifactId>_3_Maven_pomVariable_parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>  <!-- 子模块必须标识父模块的相对配置 -->
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hui</groupId>
+            <artifactId>_3_Maven_pomVariable_domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hui</groupId>
+            <artifactId>_3_Maven_pomVariable_dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- spring-junit -->
+        <dependency>                <!-- 2-2-2-1 继承聚合的可选依赖(不写版本, 使用聚合工程中设定的版本) -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+
+        <!-- junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <!-- tomcat7插件支持 -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <port>8085</port>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <ignorePackaging>true</ignorePackaging>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
