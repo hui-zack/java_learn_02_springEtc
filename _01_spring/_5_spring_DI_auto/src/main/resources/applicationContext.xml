@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="bookDao" class="dao.impl.BookDaoImpl"/>
+
+    <!--
+        1-1 添加autowire属性自动装配
+            在配置bean时, 添加autowire属性, 并在该bean中提供set方法, 可以自动自动注入所需要的依赖
+
+            autowire属性:
+                byType: 根据所有bean的类型类型查找bean
+                byName: 根据所有bean的id名称查找bean
+     -->
+    <bean id="bookService" class="service.impl.BookServiceImpl" autowire="byType" />
+
+
+</beans>

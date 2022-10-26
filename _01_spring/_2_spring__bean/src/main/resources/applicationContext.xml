@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringFacetInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+    IoC-控制反转
+    配置bean, 将bean的控制权发送到spring-IoC容器
+        bean标签: 用来配置bean
+        id属性:   表示bean的名字
+        class属性: 表示给bean具体位置
+    -->
+
+    <bean id="bookDao"  class="dao.impl.BookDaoImpl"/>
+
+    <!--
+    DI-依赖注入
+    bean标签之间的依赖关系
+        property标签表示配置当前bean所需要的依赖
+        property.name属性: 指定LoC容器传入对象的方法, 对应的是bookService代码中setBookDao的方法
+            setBoobDao方法, property.name=bookDao, 去掉set, 剩余首字母小写
+        property.ref属性: 指定依赖的bean, 指定的是在本配置文件中id="bookDao"指向的bean
+     -->
+    <bean id="bookService" class="service.impl.BookServiceImpl">
+        <property name="bookDao" ref="bookDao"/>
+    </bean>
+
+    <!-- 1-1 bean.name属性, 起别名-->
+    <bean id="nameService" name="service serviceBook" class="service.impl.BookServiceImpl">
+        <property name="bookDao" ref="bookDao"/>
+    </bean>
+
+    <!-- 2-1 默认配置单例Bean -->
+    <bean id="singletonService"  class="service.impl.BookServiceImpl" >
+        <property name="bookDao" ref="bookDao"/>
+    </bean>
+
+    <!-- 3-1 scope属性配置多例Bean -->
+    <bean id="prototypeService"  class="service.impl.BookServiceImpl" scope="prototype">
+        <property name="bookDao" ref="bookDao"/>
+    </bean>
+
+    <!-- 4-1 使用Bean的无参构造实例化对象 -->
+    <bean id="constructBean" class="dao.impl.BeanDaoImpl"/>
+
+    <!-- 5-2 配置静态工厂类实例化对象 -->
+    <bean id="staticBeanFactory" class="factory.StaticBeanFactory" factory-method="getBeanDao"/>
+
+    <!-- 6-2 配置实例工厂实例化对象 -->
+    <bean id="noStaticBeanFactory" class="factory.NoStaticBeanFactory"/>
+    <bean id="noStaticFactoryBean" factory-bean="noStaticBeanFactory" factory-method="getBeanDao"/>
+
+    <!-- 7-3 配置FactoryBean -->
+    <bean id="BeanDao" class="factory.FactoryBean__NoStatic"/>
+
+    <!-- 8-2 配置Bean生命周期函数 -->
+    <bean id="BeanLifeCycleDao" class="dao.impl.BeanLifeCycleDaoImpl" init-method="init" destroy-method="destroy"/>
+
+    <!-- 9-2 Bean实现生命周期接口 -->
+    <bean id="BeanLifeCycleDaoInterface" class="dao.impl.BeanLifeCycleDaoImpl__Interface" />
+</beans>

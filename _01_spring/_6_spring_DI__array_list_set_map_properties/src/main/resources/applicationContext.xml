@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 1-2 bean注入集合类初始值的配置 -->
+    <bean id="bookDao" class="dao.impl.bookDaoImpl">
+
+        <!-- 数组注入初始值 -->
+        <property name="array">
+            <array>
+                <value>犬夜叉</value>
+                <value>桔梗</value>
+                <value>戈薇</value>
+            </array>
+        </property>
+
+        <!-- list注入初始值 -->
+        <property name="list">
+            <list>
+                <value>北京</value>
+                <value>上海</value>
+                <value>广州</value>
+            </list>
+        </property>
+
+<!--    list注入引用类型
+        <property name="list">
+            <list>
+                <ref bean="dataSource"/>
+            </list>
+        </property>
+-->
+        <!-- set注入初始值 -->
+        <property name="set">
+            <set>
+                <value>北京</value>
+                <value>上海</value>
+                <value>广州</value>
+            </set>
+        </property>
+        <!-- map注入初始值 -->
+        <property name="map">
+            <map>
+                <entry key="name" value="桔梗" />
+                <entry key="age" value="18"/>
+                <entry key="职业" value="巫女"/>
+            </map>
+        </property>
+
+        <!-- properties注入初始值 -->
+        <property name="properties">
+            <props>
+                <prop key="name">犬夜叉</prop>
+                <prop key="age">未知</prop>
+                <prop key="身份">半妖</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

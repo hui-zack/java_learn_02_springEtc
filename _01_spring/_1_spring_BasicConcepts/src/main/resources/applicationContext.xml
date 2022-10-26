@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+    IoC-控制反转
+    1 配置bean, 将bean的控制权发送到spring-IoC容器
+        bean标签: 用来配置bean
+        id属性:   表示bean的名字
+        class属性: 表示给bean具体位置
+    -->
+    <bean id="bookDao" class="dao.impl.BookDaoImpl"/>
+
+
+
+    <!--
+    DI-依赖注入
+    2 bean标签之间的依赖关系
+        property标签表示配置当前bean所需要的依赖
+        property.name属性, 对应的是bookService代码中setBookDao的方法
+            setBoobDao方法, property.name=bookDao, 去掉set, 剩余首字母小写
+        property.ref属性, 指定的是在本配置文件中id="bookDao"指向的bean
+     -->
+    <bean id="bookService" class="service.impl.BookServiceImpl">
+        <property name="bookDao" ref="bookDao"/>
+    </bean>
+
+
+</beans>
